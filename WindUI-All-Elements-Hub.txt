@@ -1,0 +1,261 @@
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+
+-- // Load WindUI (Latest Version)
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+-- // Set initial library settings
+WindUI:SetNotificationLower(true)
+WindUI:SetTheme("Dark")
+WindUI:SetFont("rbxassetid://11702779517")
+
+-- // Add custom theme for demo
+WindUI:AddTheme({
+    Name = "DemoTheme",
+    Accent = "#00FF00",
+    Dialog = "#18181b",
+    Outline = "#FFFFFF",
+    Text = "#FFFFFF",
+    Placeholder = "#999999",
+    Background = "#0e0e10",
+    Button = "#52525b",
+    Icon = "#a1a1aa",
+})
+
+-- // Create main window
+local Window = WindUI:CreateWindow({
+    Title = "WindUI All Elements Demo Hub",
+    Icon = "star",
+    Author = "WindUI Demo",
+    Folder = "WindUIDemo",
+    Size = UDim2.fromOffset(700, 600),
+    Transparent = true,
+    Theme = "DemoTheme",
+    User = {
+        Enabled = true,
+        Callback = function() WindUI:Notify({ Title = "User", Content = "Profile clicked!", Icon = "user", Duration = 2 }) end,
+        Anonymous = false
+    },
+    SideBarWidth = 220,
+    HasOutline = true,
+    KeySystem = {
+        Key = { "DEMO2025", "WINDUI" },
+        Note = "Enter key to access WindUI Demo Hub.\nKeys: DEMO2025 or WINDUI",
+        URL = "https://footagesus.github.io/WindUI-Docs/docs"
+    }
+})
+
+-- // Create tabs
+local Tabs = {
+    Home = Window:Tab({ Title = "Home", Icon = "home" }),
+    Demo = Window:Tab({ Title = "All Elements", Icon = "code" }),
+    Settings = Window:Tab({ Title = "Settings", Icon = "settings" }),
+    Config = Window:Tab({ Title = "Config", Icon = "save" })
+}
+
+-- // Home Tab - Welcome
+local homeSection = Tabs.Home:Section({ Title = "Welcome to WindUI Demo" })
+homeSection:Paragraph({
+    Title = "Hello, " .. Players.LocalPlayer.Name,
+    Desc = "This hub demonstrates all available WindUI elements. Explore the 'All Elements' tab!",
+    Color = "Green"
+})
+
+homeSection:Button({
+    Title = "Show Notification",
+    Icon = "bell",
+    Callback = function()
+        WindUI:Notify({
+            Title = "Notification Demo",
+            Content = "This is a sample notification!",
+            Icon = "info",
+            Duration = 4
+        })
+    end
+})
+
+-- // Demo Tab - All Elements
+-- Basic Components Section
+local basicSection = Tabs.Demo:Section({ Title = "Basic Components" })
+
+basicSection:Button({
+    Title = "Button",
+    Icon = "play",
+    Callback = function()
+        print("Button clicked!")
+        WindUI:Notify({ Title = "Button", Content = "Clicked!", Icon = "check", Duration = 2 })
+    end
+})
+
+basicSection:Toggle({
+    Title = "Toggle",
+    Desc = "On/Off switch",
+    Value = false,
+    Callback = function(value)
+        print("Toggle: " .. tostring(value))
+    end
+})
+
+basicSection:Input({
+    Title = "Input (Textbox)",
+    Placeholder = "Enter text here...",
+    Callback = function(text)
+        print("Input: " .. text)
+    end
+})
+
+-- Selection Components Section
+local selectionSection = Tabs.Demo:Section({ Title = "Selection Components" })
+
+local themeValues = {}
+for name, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themeValues, name)
+end
+
+selectionSection:Dropdown({
+    Title = "Dropdown",
+    Multi = false,
+    AllowNone = false,
+    Value = themeValues[1],
+    Values = themeValues,
+    Callback = function(value)
+        WindUI:SetTheme(value)
+        print("Dropdown selected: " .. value)
+    end
+})
+
+selectionSection:Keybind({
+    Title = "Keybind",
+    Desc = "Bind a key",
+    Value = "RightShift",
+    Callback = function(key)
+        print("Keybind set to: " .. key)
+    end
+})
+
+-- Adjustment Components Section
+local adjustSection = Tabs.Demo:Section({ Title = "Adjustment Components" })
+
+adjustSection:Slider({
+    Title = "Slider",
+    Min = 0,
+    Max = 100,
+    Default = 50,
+    Float = 0.1,
+    Callback = function(value)
+        print("Slider value: " .. value)
+    end
+})
+
+adjustSection:Color({
+    Title = "Color Picker",
+    Value = Color3.fromRGB(255, 0, 0),
+    Callback = function(color)
+        print("Color selected: " .. tostring(color))
+    end
+})
+
+-- Display Components Section
+local displaySection = Tabs.Demo:Section({ Title = "Display Components" })
+
+displaySection:Paragraph({
+    Title = "Paragraph",
+    Desc = "This is a multi-line text display with optional title and color.",
+    Color = "Blue"
+})
+
+-- Note: Separator not explicitly documented, but common; assuming available
+displaySection:Separator({ Title = "Separator" }) -- If supported
+
+-- // Settings Tab
+local settingsSection = Tabs.Settings:Section({ Title = "Appearance Settings" })
+
+settingsSection:Toggle({
+    Title = "Window Transparency",
+    Value = WindUI:GetTransparency(),
+    Callback = function(enabled)
+        Window:ToggleTransparency(enabled)
+    end
+})
+
+settingsSection:Slider({
+    Title = "Window Opacity",
+    Min = 0,
+    Max = 1,
+    Default = 0.8,
+    Float = 0.01,
+    Callback = function(value)
+        Window:SetOpacity(value)
+    end
+})
+
+settingsSection:Keybind({
+    Title = "Toggle UI Key",
+    Desc = "Key to show/hide UI",
+    Value = "H",
+    Callback = function(value)
+        Window:SetToggleKey(Enum.KeyCode[value])
+    end
+})
+
+-- // Config Tab
+local configSection = Tabs.Config:Section({ Title = "Configuration" })
+
+local configFolder = "WindUIDemo/Configs"
+makefolder(configFolder)
+
+local function SaveConfig(name)
+    local data = {
+        theme = WindUI:GetCurrentTheme(),
+        transparency = WindUI:GetTransparency(),
+        size = {X = Window:GetSize().X.Offset, Y = Window:GetSize().Y.Offset}
+    }
+    writefile(configFolder .. "/" .. name .. ".json", HttpService:JSONEncode(data))
+    WindUI:Notify({ Title = "Saved", Content = name, Icon = "save", Duration = 2 })
+end
+
+local function LoadConfig(name)
+    if isfile(configFolder .. "/" .. name .. ".json") then
+        local data = HttpService:JSONDecode(readfile(configFolder .. "/" .. name .. ".json"))
+        WindUI:SetTheme(data.theme)
+        Window:ToggleTransparency(data.transparency)
+        Window:Resize(UDim2.fromOffset(data.size.X, data.size.Y))
+        WindUI:Notify({ Title = "Loaded", Content = name, Icon = "load", Duration = 2 })
+    end
+end
+
+configSection:Input({
+    Title = "Config Name",
+    Placeholder = "Enter name",
+    Callback = function(name) end -- Stored globally or via closure
+})
+
+configSection:Button({
+    Title = "Save",
+    Icon = "save",
+    Callback = function()
+        -- Assume name from input
+        SaveConfig("demo")
+    end
+})
+
+configSection:Button({
+    Title = "Load",
+    Icon = "load",
+    Callback = function()
+        LoadConfig("demo")
+    end
+})
+
+-- // Footer in Config
+local footerSection = Tabs.Config:Section({ Title = "Demo Hub v1.0" })
+footerSection:Paragraph({
+    Title = "WindUI Elements Demo",
+    Desc = "This showcases Button, Toggle, Input, Dropdown, Keybind, Slider, Color, Paragraph, Section, Tab, Window, Notify.",
+    Color = "Grey"
+})
+
+-- // Close handler
+Window:OnClose(function()
+    print("WindUI Demo Hub closed")
+end)
