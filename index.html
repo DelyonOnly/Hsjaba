@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cra7zy Hub: The #1 Universal Script Hub</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background-color: #000000;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, rgba(255, 255, 255, 0.02) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(255, 255, 255, 0.02) 100%);
+            animation: glitch 3s linear infinite;
+            z-index: -1;
+        }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, 2px); }
+            20% { transform: translate(2px, -2px); }
+            30% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, -1px); }
+            50% { transform: translate(-2px, 2px); }
+            60% { transform: translate(2px, -2px); }
+            70% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            90% { transform: translate(-2px, 2px); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            color: #00ff41;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            font-family: 'Courier Prime', monospace;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff0000;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: #00ff41;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #ff0000;
+            border-color: #ff0000;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+            background: rgba(255, 0, 0, 0.1);
+        }
+        .discord-link {
+            background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s;
+            font-weight: 600;
+        }
+        .discord-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+        [data-lucide] {
+            stroke: currentColor;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            color: #00ff41;
+            text-align: center;
+            padding: 160px 0 120px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Courier Prime', monospace;
+        }
+        .hero::before {
+            content: '1x1x1x1 HACKED YOUR SYSTEM...';
+            position: absolute;
+            top: 20%;
+            left: -100%;
+            color: rgba(255, 0, 0, 0.1);
+            font-size: 2rem;
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes scroll {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ff0000;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            animation: flicker 2s infinite alternate;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            color: #00ff41;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+            color: #000;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 0;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            border: 1px solid #00ff41;
+            font-family: 'Courier Prime', monospace;
+        }
+        .btn:hover {
+            transform: translateY(-2px) skew(-5deg);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
+            color: #000;
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            margin-left: 1rem;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        .btn-secondary:hover {
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        /* Features */
+        .features {
+            padding: 120px 0;
+            background-color: #000000;
+            font-family: 'Courier Prime', monospace;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2.75rem;
+            margin-bottom: 4rem;
+            color: #00ff41;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        .feature-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 0;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) skew(2deg);
+            border-color: #ff0000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255, 0, 0, 0.3);
+            animation: glitch-card 0.5s ease-in-out;
+        }
+        @keyframes glitch-card {
+            0%, 100% { transform: translateY(-8px) skew(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: translateY(-8px) skew(2deg) translateX(2px); }
+            20%, 40%, 60%, 80% { transform: translateY(-8px) skew(-2deg) translateX(-2px); }
+        }
+        .feature-card i {
+            font-size: 3.5rem;
+            color: #ff0000;
+            margin-bottom: 1.5rem;
+            display: block;
+            transition: all 0.3s ease;
+            filter: hue-rotate(0deg) brightness(1);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        .feature-card:hover i {
+            filter: hue-rotate(120deg) brightness(1.5) saturate(2); /* Verde neon no hover */
+            transform: scale(1.2) rotate(5deg);
+            color: #00ff41;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00ff41;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Premium Section */
+        .premium {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+            text-align: center;
+            position: relative;
+            font-family: 'Courier Prime', monospace;
+        }
+        .premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        .premium h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+            color: #ff0000;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+        }
+        .premium p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #00ff41;
+        }
+        .price {
+            font-size: 4rem;
+            color: #ff0000;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+        .premium .btn {
+            font-size: 1.1rem;
+            padding: 16px 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: #000000;
+            color: #666666;
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(0, 255, 65, 0.1);
+            font-family: 'Courier Prime', monospace;
+        }
+        footer p {
+            margin-bottom: 1rem;
+        }
+        footer a {
+            color: #00ff41;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ff0000;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            .price {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">1x1x1x1 x Cra7zy Hub</div>
+            <ul class="nav-links">
+                <li><a href="#home"><i data-lucide="skull"></i>Home</a></li>
+                <li><a href="#scripts"><i data-lucide="code"></i>Scripts</a></li>
+                <li><a href="https://discord.gg/c7stds" class="discord-link"><i data-lucide="discourse"></i>Discord</a></li>
+                <li><a href="#purchase"><i data-lucide="shopping-bag"></i>Purchase</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>The #1 Universal Script Hub</h1>
+            <p>Cra7zy Hub is dedicated to providing powerful, free scripts for Roblox games. Our mission is to enhance your gaming experience by offering easy-to-use tools that are accessible to everyone. Beware the shadows... 1x1x1x1 watches.</p>
+            <a href="#getkey" class="btn"><i data-lucide="key"></i>Get Your Key Free</a>
+            <a href="#purchase" class="btn btn-secondary"><i data-lucide="arrow-right"></i>Go Premium</a>
+        </div>
+    </section>
+
+    <section id="scripts" class="features">
+        <div class="container">
+            <h2>Why Choose Cra7zy Hub?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i data-lucide="gift"></i>
+                    <h3>Free Scripts</h3>
+                    <p>Access a wide range of powerful scripts at no cost. Start enhancing your gameplay today without spending a dime. But remember, nothing is truly free in the code...</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="zap"></i>
+                    <h3>Easy to Use</h3>
+                    <p>Simple integration and user-friendly interface designed for all players, from beginners to pros. Even the glitches can't stop you.</p>
+                </div>
+                <div class="feature-card">
+                    <i data-lucide="users"></i>
+                    <h3>Community Supported</h3>
+                    <p>Join our thriving Discord community for real-time support, updates, and sharing experiences. Whispers of 1x1x1x1 echo here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="purchase" class="premium">
+        <div class="container">
+            <h2>Unlock Premium Features</h2>
+            <p>Get instant access to premium features, early access to new scripts, exclusive tools, and a lifetime key for uninterrupted use. Enter the void at your own risk.</p>
+            <div class="price">$9.99 / Lifetime</div>
+            <a href="https://c7stds.gg/purchase" class="btn"><i data-lucide="shopping-bag"></i>Choose Payment Method</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Cra7zy Hub x 1x1x1x1. The #1 Universal Script Hub for Roblox. All rights reserved. He is always watching...</p>
+            <p><a href="https://discord.gg/c7stds">Join our Discord Community</a> | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
